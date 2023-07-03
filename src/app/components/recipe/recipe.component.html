@@ -1,0 +1,71 @@
+<div class="grid p-4 text-white bg-black sm:p-12 lg:h-screen lg:w-screen place-items-center">
+  <div
+    class="lg:flex lg:w-2/3 bg-[#111] lg:h-2/3 rounded-xl overflow-hidden outline outline-2 outline-[#ff4e00] outline-offset-8"
+  >
+    <div class="flex items-center justify-center h-full lg:block lg:w-1/2">
+      <img class="h-full" src="{{ single.image }}" alt="" />
+    </div>
+    <div class="flex flex-col h-full gap-3 p-4 lg:w-1/2 justify-evenly">
+      <p class="text-5xl text-[#ff4e00] font-lobster">{{ single.label }}</p>
+      <div class="overflow-auto max-h-1/2">
+        <p class="text-xl lg:text-2xl underline decoration-[#ff4e00] underline-offset-4">Ingredients</p>
+        <div
+          class="text-lg"
+          *ngFor="let item of single.ingredients; index as i"
+        >
+          <li>{{ item.text }}</li>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <div class="flex">
+          <span class="text-white">Cuisine Type : &nbsp; </span>
+          <div class="flex gap-2">
+            <div class="" *ngFor="let type of single.cuisineType">
+              <span
+                class="bg-[#ff4e00] text-white p-1 px-2 rounded-xl text-xs flex items-center justify-center"
+                >{{ type }}</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="flex">
+          <span class="text-white">Dish Type : &nbsp; </span>
+          <div class="flex gap-2">
+            <div class="" *ngFor="let type of single.dishType">
+              <span
+                class="bg-[#ff4e00] text-white p-1 px-2 rounded-xl text-xs flex items-center justify-center"
+                >{{ type }}</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="flex">
+          <span class="text-white">Meal Type : &nbsp; </span>
+          <div class="flex gap-2">
+            <div class="" *ngFor="let type of single.mealType">
+              <span
+                class="bg-[#ff4e00] text-white p-1 px-2 rounded-xl text-xs flex items-center justify-center"
+                >{{ type }}</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="">
+        <p class="text-xl lg:text-2xl underline decoration-[#ff4e00] underline-offset-4">Preparation</p>
+        <p>
+          How to cook
+          <a href="{{ single.url }}" class="text-[#0288d1] underline"
+            >click here</a
+          >
+        </p>
+      </div>
+      <div class="">
+        <button routerLink="/" class="bg-[#ff4e00] w-full py-2 rounded-xl font-semibold">back to home</button>
+      </div>
+    </div>
+  </div>
+</div>

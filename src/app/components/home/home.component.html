@@ -1,0 +1,133 @@
+<div class="w-full h-screen">
+  <div
+    class="relative w-screen {{
+      recipes ? 'h-[200px]' : 'h-screen'
+    }}  grid place-items-center overflow-hidden"
+    style="
+      background: url(../../../assets/pexels-chan-walrus-958545.jpg);
+      background-size: cover;
+    "
+  >
+    <div class="absolute w-full h-screen bg-black/80"></div>
+    <div
+      class="relative {{
+        !recipes ? 'm-auto' : 'w-full'
+      }} flex flex-col gap-6 items-center"
+    >
+      <p
+        *ngIf="!recipes"
+        class="text-6xl text-center font-lobster w-2/3 text-[#ff4e00]"
+      >
+        What do you like to cook today?
+      </p>
+      <div class="relative flex items-center justify-center w-5/6 gap-3" >
+        <button routerLink="/"
+          class="flex items-center justify-center h-12 bg-[#ff4e00] rounded-full w-12 -left-16 {{
+            recipes ? 'visible' : 'hidden'
+          }} "
+        >
+          <span class="text-white material-symbols-outlined"> arrow_back </span>
+        </button>
+        <div
+          class="absolute inset-y-0 left-0 flex items-center {{
+            recipes ? 'pl-[68px]' : 'pl-3'
+          }} pointer-events-none"
+        >
+          <svg
+            aria-hidden="true"
+            class="w-5 h-5 text-gray-500 dark:text-gray-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            ></path>
+          </svg>
+        </div>
+        <input
+          type="search"
+          id="default-search"
+          class="block w-full p-4 pl-10 text-sm text-white border border-[#ff4e00] rounded-lg bg-black/50 focus:outline-none"
+          placeholder="Search..."
+          required
+          [(ngModel)]="input"
+          (keyup)="getRecipe()"
+        />
+        <button
+          (click)="getRecipe()"
+          class="text-white absolute right-2.5 bottom-2.5 bg-[#ff4e00] hover:bg-[#ff8100] focus:outline-none font-medium rounded-lg text-sm px-4 py-2"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    *ngIf="length"
+    class="flex flex-wrap items-center justify-center gap-6 py-16 bg-[#111]"
+  >
+    <div
+      class="p-2 bg-[#202020] rounded-lg w-80 flex flex-col items-start justify-center"
+      *ngFor="let item of recipes"
+      (click)="assignUrl(item._links.self.href)"
+    >
+      <img class="rounded-t-lg" src="{{ item.recipe.image }}" alt="" />
+      <p class="text-[#ff6d2e] py-4 text-lg font-bold">
+        {{ item.recipe.label }}
+      </p>
+
+      <div *ngIf="recipes" class="flex flex-col gap-2">
+        <div class="flex">
+          <span class="text-white">Cuisine Type : &nbsp; </span>
+          <div class="flex gap-2">
+            <div class="" *ngFor="let type of item.recipe.cuisineType">
+              <span
+                class="bg-[#ff4e00] text-white p-1 px-2 rounded-xl text-xs flex items-center justify-center"
+                >{{ type }}</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="flex">
+          <span class="text-white">Dish Type : &nbsp; </span>
+          <div class="flex gap-2">
+            <div class="" *ngFor="let type of item.recipe.dishType">
+              <span
+                class="bg-[#ff4e00] text-white p-1 px-2 rounded-xl text-xs flex items-center justify-center"
+                >{{ type }}</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="flex">
+          <span class="text-white">Meal Type : &nbsp; </span>
+          <div class="flex gap-2">
+            <div class="" *ngFor="let type of item.recipe.mealType">
+              <span
+                class="bg-[#ff4e00] text-white p-1 px-2 rounded-xl text-xs flex items-center justify-center"
+                >{{ type }}</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!length" class="h-[calc(100vh-200px)] bg-[#111] flex flex-col gap-6 w-full justify-center items-center">
+    <div class="flex items-center justify-center">
+      <p class="text-[#ff4e00] text-[3rem]">4</p>
+    <span class="material-symbols-outlined text-[#ff4e00] text-[3rem]">
+      error
+      </span>
+      <p class="text-[#ff4e00] text-[3rem]">4</p>
+    </div>
+      <p class="text-[#ff4e00] text-3xl font-mono">Recipe not found</p>
+  </div>
+</div>
