@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment.development';
 export class RecipeService {
 
   baseUrl='https://api.edamam.com/api/recipes/v2?'
-  recipeUrl='https://api.edamam.com/api/recipes/v2/44485e36696fcd850d5389af63634dae?type=public&app_id=1caefdbc&app_key=1ac0dac0653d3eb048cfe6f74a644a67'
+  recipeUrl=''
   app_key=environment.app_key
   app_id=environment.app_id
   constructor(private http:HttpClient) {}
