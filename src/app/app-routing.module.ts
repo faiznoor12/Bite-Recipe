@@ -6,7 +6,7 @@ import { RecipeComponent } from './components/recipe/recipe.component';
 const routes: Routes = [
 
    { path: '', component: HomeComponent },
-   { path: 'recipe', component: RecipeComponent },
+   { path: 'recipe/:id', component: RecipeComponent },
 
 ];
 

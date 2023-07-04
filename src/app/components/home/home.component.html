@@ -74,7 +74,7 @@
     <div
       class="p-2 bg-[#202020] rounded-lg w-80 flex flex-col items-start justify-center"
       *ngFor="let item of recipes"
-      (click)="assignUrl(item._links.self.href)"
+      [routerLink]="['/recipe',item._links.self.href]"
     >
       <img class="rounded-t-lg" src="{{ item.recipe.image }}" alt="" />
       <p class="text-[#ff6d2e] py-4 text-lg font-bold">

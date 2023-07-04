@@ -25,8 +25,8 @@ export class RecipeService {
       }
     }).pipe(map(res=>res.hits))
   }
-  singleRecipe():Observable<singleRecipe>{
-    return this.http.get<single>(this.recipeUrl).pipe(map(res=>res.recipe))
+  singleRecipe(url:string):Observable<singleRecipe>{
+    return this.http.get<single>(url).pipe(map(res=>res.recipe))
   }
 
 
