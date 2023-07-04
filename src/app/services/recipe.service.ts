@@ -15,6 +15,7 @@ export class RecipeService {
   app_key=environment.app_key
   app_id=environment.app_id
   constructor(private http:HttpClient) {}
+  
   getRecipe(input:string):Observable<Hit[]>{
     return this.http.get<all>(this.baseUrl,{
       params:{

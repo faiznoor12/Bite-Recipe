@@ -1,4 +1,4 @@
-<div class="w-full h-screen">
+<div class="w-full h-screen bg-[#111]">
   <div
     class="relative w-screen {{
       recipes ? 'h-[200px]' : 'h-screen'
@@ -16,7 +16,7 @@
     >
       <p
         *ngIf="!recipes"
-        class="text-6xl text-center font-lobster w-2/3 text-[#ff4e00]"
+        class="sm:text-6xl text-center font-lobster w-2/3 text-[#ff4e00] text-3xl"
       >
         What do you like to cook today?
       </p>
@@ -56,10 +56,10 @@
           placeholder="Search..."
           required
           [(ngModel)]="input"
-          (keyup)="getRecipe()"
+          (ngModelChange)="this.debounce.next($event)"
         />
         <button
-          (click)="getRecipe()"
+          (click)="getRecipe(input)"
           class="text-white absolute right-2.5 bottom-2.5 bg-[#ff4e00] hover:bg-[#ff8100] focus:outline-none font-medium rounded-lg text-sm px-4 py-2"
         >
           Search
@@ -76,7 +76,7 @@
       *ngFor="let item of recipes"
       [routerLink]="['/recipe',item._links.self.href]"
     >
-      <img class="rounded-t-lg" src="{{ item.recipe.image }}" alt="" />
+      <img loading="lazy" class="rounded-t-lg" src="{{ item.recipe.image }}" alt="" />
       <p class="text-[#ff6d2e] py-4 text-lg font-bold">
         {{ item.recipe.label }}
       </p>
@@ -120,7 +120,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="!length" class="h-[calc(100vh-200px)] bg-[#111] flex flex-col gap-6 w-full justify-center items-center">
+  <div *ngIf="!length && input" class="h-[calc(100vh-200px)] bg-[#111] flex flex-col gap-6 w-full justify-center items-center">
     <div class="flex items-center justify-center">
       <p class="text-[#ff4e00] text-[3rem]">4</p>
     <span class="material-symbols-outlined text-[#ff4e00] text-[3rem]">

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 import { Hit } from 'src/app/models/recipe.model';
 import { RecipeService } from 'src/app/services/recipe.service';
 
@@ -12,13 +13,20 @@ export class HomeComponent {
   input!: string;
   recipes!: Hit[];
   length!: number;
+  debounce = new Subject<string>()
+
   constructor(private recipe: RecipeService, private router: Router) {
+    this.debounce
+      .pipe(debounceTime(1000), distinctUntilChanged())
+      .subscribe((value) => {
+        this.getRecipe(value);
+      });
     // this.getRecipe()
   }
 
-  getRecipe() {
+  getRecipe(input: string) {
     this.recipe
-      .getRecipe(this.input)
+      .getRecipe(input)
       .subscribe({
         next: (res) => {
           this.recipes = res
